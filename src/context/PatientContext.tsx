@@ -146,16 +146,27 @@ const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
 export const PatientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [allPatients, setAllPatients] = useState<Patient[]>(() => {
-        const saved = localStorage.getItem('hospital_patients');
-        return saved ? JSON.parse(saved) : MOCK_PATIENTS;
+        try {
+            const saved = localStorage.getItem('hospital_patients');
+            return saved ? JSON.parse(saved) : MOCK_PATIENTS;
+        } catch (e) {
+            console.error('Error loading patients from localStorage:', e);
+            return MOCK_PATIENTS;
+        }
     });
 
     const [currentPatient, setCurrentPatientState] = useState<Patient | null>(() => {
-        const saved = localStorage.getItem('current_patient_id');
-        if (saved) {
-            return allPatients.find(p => p.id === saved) || allPatients[0];
+        try {
+            const savedId = localStorage.getItem('current_patient_id');
+            const patients = allPatients.length > 0 ? allPatients : MOCK_PATIENTS;
+            if (savedId) {
+                return patients.find(p => p.id === savedId) || patients[0];
+            }
+            return patients[0];
+        } catch (e) {
+            console.error('Error loading current patient:', e);
+            return MOCK_PATIENTS[0];
         }
-        return allPatients[0];
     });
 
     useEffect(() => {
