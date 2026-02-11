@@ -53,10 +53,10 @@ export function PatientOverview() {
 
                     <button
                         onClick={() => window.dispatchEvent(new CustomEvent('open-prescription-modal'))}
-                        className="bg-primary hover:bg-primary-dark transition-colors text-white px-3 md:px-6 py-2 rounded-xl flex items-center gap-2 font-medium text-[10px] md:text-sm shrink-0"
+                        className="bg-primary hover:bg-primary-dark transition-colors text-white px-3 md:px-6 py-2 rounded-xl flex items-center gap-2 font-bold text-[9px] md:text-sm shrink-0 uppercase tracking-wide"
                     >
                         <ClipboardPlus size={16} className="md:w-[18px] md:h-[18px]" />
-                        <span className="hidden xs:inline">PRESCRIPTION</span>
+                        <span>ADD PRESCRIPTION</span>
                     </button>
                 </div>
                 <p className="text-[#90a1b9] text-sm md:text-base">Comprehensive medical overview for {currentPatient.name}</p>

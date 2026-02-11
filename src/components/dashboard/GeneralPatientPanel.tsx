@@ -2,7 +2,6 @@ import { Pin, MoreHorizontal } from "lucide-react";
 const xrayUrl = "https://super.abril.com.br/wp-content/uploads/2018/07/site33.jpg?crop=1&resize=1212,909";
 
 export function GeneralPatientPanel() {
-    const xrays = [1, 2, 3, 4, 5, 6];
 
     return (
         <div className="w-full min-h-[500px] lg:h-[756px] bg-[#17191A] rounded-[18px] border border-white/5 flex flex-col overflow-hidden shrink-0 shadow-2xl">
@@ -32,19 +31,19 @@ export function GeneralPatientPanel() {
                     </p>
 
                     {/* Carousel */}
-                    <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                        {xrays.map((id) => (
+                    <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
                             <div
                                 key={id}
                                 onClick={() => window.dispatchEvent(new CustomEvent('open-image-modal', {
                                     detail: { url: xrayUrl, title: `X-ray View #${id} - Left Shoulder` }
                                 }))}
-                                className="w-[84px] h-[96px] bg-[#D9D9D9]/20 rounded-[12px] shrink-0 hover:scale-105 transition-transform cursor-pointer overflow-hidden border border-white/5"
+                                className="w-[100px] h-[120px] bg-white/5 rounded-[16px] shrink-0 hover:scale-105 transition-all cursor-pointer overflow-hidden border border-white/10 group"
                             >
                                 <img
                                     src={xrayUrl}
                                     alt={`X-ray ${id}`}
-                                    className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
+                                    className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity"
                                 />
                             </div>
                         ))}

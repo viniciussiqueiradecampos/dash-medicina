@@ -45,7 +45,7 @@ export function MedicalImaging() {
                 </div>
 
                 {/* Lateral Views Sidebar */}
-                <div className="w-full md:w-[180px] flex flex-row md:flex-col gap-3 h-[100px] md:h-auto">
+                <div className="w-full md:w-[180px] flex flex-row md:flex-col gap-3 h-[100px] md:h-auto overflow-x-auto md:overflow-y-auto custom-scrollbar">
                     {lateralViews.map((view) => (
                         <div
                             key={view.id}

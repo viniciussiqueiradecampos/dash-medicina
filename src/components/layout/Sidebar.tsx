@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
     Activity,
     FlaskConical,
@@ -8,7 +9,8 @@ import {
     Menu,
     Home,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    X
 } from "lucide-react";
 import { cn } from "../../lib/utils";
 import logoUrl from "../../assets/logo.svg";
@@ -136,6 +138,20 @@ interface MobileHeaderProps {
 }
 
 export function MobileHeader({ onMenuClick }: MobileHeaderProps) {
+    const [showUserMenu, setShowUserMenu] = useState(false);
+    const navigate = useNavigate();
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setShowUserMenu(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
     return (
         <header className="xl:hidden fixed top-0 left-0 right-0 h-[64px] bg-[#121212] z-50 flex items-center justify-between px-4 border-b border-white/5">
             <div className="flex items-center gap-3">
@@ -145,8 +161,43 @@ export function MobileHeader({ onMenuClick }: MobileHeaderProps) {
                 <img src={logoUrl} alt="Abstract Vision" className="h-10 w-auto mix-blend-lighten" />
             </div>
 
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-primary font-bold text-xs">DA</span>
+            <div className="relative" ref={menuRef}>
+                <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className={cn(
+                        "w-10 h-10 rounded-full flex items-center justify-center border transition-all",
+                        showUserMenu
+                            ? "bg-primary border-primary shadow-lg shadow-primary/20"
+                            : "bg-primary/20 border-primary/20"
+                    )}
+                >
+                    <span className={cn("font-bold text-xs", showUserMenu ? "text-white" : "text-primary")}>DA</span>
+                </button>
+
+                {showUserMenu && (
+                    <div className="absolute top-[56px] right-0 w-[220px] bg-[#17191a] border border-white/10 rounded-2xl shadow-3xl z-[100] overflow-hidden backdrop-blur-xl bg-opacity-95 animate-in fade-in zoom-in-95 duration-200">
+                        <div className="p-4 border-b border-white/5 bg-white/[0.02]">
+                            <p className="text-sm font-bold text-white">Dr. Admin</p>
+                            <p className="text-[10px] text-[#62748e]">pedro.campos@hospital.com</p>
+                        </div>
+                        <div className="p-2">
+                            <button
+                                onClick={() => { navigate("/settings"); setShowUserMenu(false); }}
+                                className="w-full text-left px-3 py-2.5 text-xs text-[#90a1b9] hover:bg-white/5 hover:text-white rounded-lg transition-colors flex items-center gap-2"
+                            >
+                                <Settings size={14} />
+                                Account Settings
+                            </button>
+                            <button
+                                onClick={() => { navigate("/login"); setShowUserMenu(false); }}
+                                className="w-full text-left px-3 py-2.5 text-xs text-status-danger hover:bg-status-danger/10 rounded-lg transition-colors font-bold mt-1 flex items-center gap-2"
+                            >
+                                <X size={14} />
+                                Sign Out
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </header>
     );

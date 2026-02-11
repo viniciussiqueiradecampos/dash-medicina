@@ -97,7 +97,7 @@ export function LatestBloodTests() {
                 </div>
 
                 {/* Scrollable Container */}
-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                     {results.map((result, i) => (
                         <LabResultCard key={i} {...result} />
                     ))}

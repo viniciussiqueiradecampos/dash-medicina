@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, UserCheck, ChevronRight, Users, X, Save, Filter } from "lucide-react";
+import { Search, UserCheck, ChevronRight, Users, X, Save, Pencil } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { usePatientContext } from "../../context/PatientContext";
 import type { Patient } from "../../context/PatientContext";
@@ -206,8 +206,8 @@ export function PatientsPage() {
                                     onClick={() => setEditingPatient(patient)}
                                     className="flex-1 md:flex-none py-2.5 md:p-2 bg-white/5 md:bg-transparent text-[#62748e] hover:text-white hover:bg-white/10 rounded-xl md:rounded-lg transition-all flex items-center justify-center gap-2"
                                 >
-                                    <Filter size={18} />
-                                    <span className="md:hidden text-xs font-bold uppercase">Filter/Edit</span>
+                                    <Pencil size={18} />
+                                    <span className="md:hidden text-xs font-bold uppercase">Edit</span>
                                 </button>
                                 <button
                                     onClick={() => { setCurrentPatient(patient); navigate('/overview'); }}

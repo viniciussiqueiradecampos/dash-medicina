@@ -105,7 +105,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 {/* Content with top padding to account for fixed header */}
                 <main className={cn(
                     "flex-1 w-full max-w-[1920px]",
-                    !isLoginPage ? "pt-[84px] xl:pt-[120px] p-4 sm:p-6 lg:p-8" : "flex items-center justify-center"
+                    !isLoginPage ? "pt-[130px] xl:pt-[150px] px-4 pb-8 sm:px-6 lg:px-8" : "flex items-center justify-center"
                 )}>
                     {children}
                 </main>
