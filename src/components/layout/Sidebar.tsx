@@ -54,7 +54,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
 
             {/* Logo */}
             <div className={cn(
-                "mb-[60px] overflow-hidden transition-all duration-300 flex items-center justify-center",
+                "mb-[60px] overflow-hidden transition-all duration-300 flex items-center justify-center h-[70px]",
                 isCollapsed ? "w-full pl-0" : "w-[180px] pl-2"
             )}>
                 <img
