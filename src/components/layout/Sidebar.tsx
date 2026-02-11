@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { cn } from "../../lib/utils";
 import logoUrl from "../../assets/logo.svg";
+import closeLogoUrl from "../../assets/close-logo.svg";
 import userAvatarUrl from "../../assets/97b3ba4a22daa40c617f6478912494232f8c468d.png";
 
 interface SidebarProps {
@@ -56,17 +57,16 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
 
             {/* Logo */}
             <div className={cn(
-                "mb-[60px] pl-2 overflow-hidden transition-all duration-300",
-                isCollapsed ? "w-12" : "w-[180px]"
+                "mb-[60px] pl-2 overflow-hidden transition-all duration-300 flex items-center justify-center",
+                isCollapsed ? "w-full pl-0" : "w-[180px]"
             )}>
                 <img
-                    src={logoUrl}
+                    src={isCollapsed ? closeLogoUrl : logoUrl}
                     alt="Abstract Vision"
                     className={cn(
-                        "h-auto object-contain transition-all duration-300",
-                        isCollapsed ? "min-w-[180px] -ml-[10px] scale-[1.2]" : "w-full"
+                        "h-auto object-contain transition-all duration-300 animate-in fade-in zoom-in-95",
+                        isCollapsed ? "w-8" : "w-full"
                     )}
-                    style={isCollapsed ? { clipPath: 'inset(0 80% 0 0)' } : {}}
                 />
             </div>
 
