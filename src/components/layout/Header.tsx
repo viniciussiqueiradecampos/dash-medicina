@@ -2,7 +2,7 @@ import { Search, History, Bell, Settings } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "../../lib/utils";
 import userAvatarUrl from "../../assets/97b3ba4a22daa40c617f6478912494232f8c468d.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { usePatientContext } from "../../context/PatientContext";
 import type { Patient } from "../../context/PatientContext";
 
@@ -12,6 +12,7 @@ interface HeaderProps {
 
 export function Header({ className }: HeaderProps) {
     const { allPatients, setCurrentPatient } = usePatientContext();
+    const location = useLocation();
     const [search, setSearch] = useState("");
     const [suggestions, setSuggestions] = useState<Patient[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -121,14 +122,16 @@ export function Header({ className }: HeaderProps) {
 
             {/* Right Actions */}
             <div className="flex items-center gap-[30px]">
-                {/* View Patient History Button */}
-                <button
-                    onClick={() => window.dispatchEvent(new CustomEvent('open-history-modal'))}
-                    className="flex items-center gap-2 bg-[#f6f6f6] text-primary hover:bg-white hover:shadow-lg transition-all duration-200 px-[13px] py-[8px] rounded-[14px] h-[40px]"
-                >
-                    <History size={20} className="text-primary" />
-                    <span className="text-[14px] font-medium whitespace-nowrap">View patient history</span>
-                </button>
+                {/* View Patient History Button - Only in Overview */}
+                {location.pathname === '/overview' && (
+                    <button
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-history-modal'))}
+                        className="flex items-center gap-2 bg-[#f6f6f6] text-primary hover:bg-white hover:shadow-lg transition-all duration-200 px-[13px] py-[8px] rounded-[14px] h-[40px]"
+                    >
+                        <History size={20} className="text-primary" />
+                        <span className="text-[14px] font-medium whitespace-nowrap">View patient history</span>
+                    </button>
+                )}
 
                 {/* Icons & Profile */}
                 <div className="flex items-center gap-[30px] pl-4 border-l border-white/5 h-[40px]">

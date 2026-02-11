@@ -41,21 +41,26 @@ export function Home() {
 
     const handleStopTimer = () => {
         if (currentPatient && timer > 0) {
+            const finalDuration = timer;
+            setIsTimerRunning(false);
+            if (timerRef.current) clearInterval(timerRef.current);
+
             const updatedPatient = {
                 ...currentPatient,
-                serviceTimer: (currentPatient.serviceTimer || 0) + timer
+                serviceTimer: (currentPatient.serviceTimer || 0) + finalDuration
             };
             updatePatient(updatedPatient);
+
             // Dispatch event for recording in registry
             window.dispatchEvent(new CustomEvent('service-recorded', {
                 detail: {
                     patientId: currentPatient.id,
-                    duration: timer,
+                    duration: finalDuration,
                     timestamp: new Date().toISOString()
                 }
             }));
+
             setTimer(0);
-            setIsTimerRunning(false);
         }
     };
 

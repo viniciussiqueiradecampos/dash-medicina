@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, Mail, Lock, Eye, EyeOff, Save, Camera } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, Save, Camera, Activity } from "lucide-react";
 import userAvatarUrl from "../../assets/97b3ba4a22daa40c617f6478912494232f8c468d.png";
 
 export function SettingsPage() {
@@ -63,6 +63,19 @@ export function SettingsPage() {
                                 <input
                                     type="email"
                                     defaultValue="pedro.campos@hospital.com"
+                                    className="w-full bg-[#1d293d] border border-white/5 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primary transition-colors"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Professional Role / Position */}
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-[#90a1b9]">Professional Role</label>
+                            <div className="relative">
+                                <Activity className="absolute left-4 top-1/2 -translate-y-1/2 text-[#62748e]" size={20} />
+                                <input
+                                    type="text"
+                                    defaultValue="Orthopedic Surgeon"
                                     className="w-full bg-[#1d293d] border border-white/5 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primary transition-colors"
                                 />
                             </div>

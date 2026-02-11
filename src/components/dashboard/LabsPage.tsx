@@ -186,7 +186,10 @@ export function LabsPage() {
                                             <div className="h-4 w-[1px] bg-white/5" />
                                             <p className="text-xs text-[#62748e]">Processing stage: <span className="text-white font-medium">Initial collection</span></p>
                                         </div>
-                                        <button className="flex items-center gap-1 text-xs font-bold text-primary hover:text-white transition-colors">
+                                        <button
+                                            onClick={() => window.dispatchEvent(new CustomEvent('open-lab-exam-details-modal', { detail: exam }))}
+                                            className="flex items-center gap-1 text-xs font-bold text-primary hover:text-white transition-colors"
+                                        >
                                             View Details
                                             <ChevronRight size={14} />
                                         </button>
@@ -211,7 +214,11 @@ export function LabsPage() {
                         </div>
                         <div className="divide-y divide-white/5">
                             {RECENT_HISTORY.map((h) => (
-                                <div key={h.id} className="p-5 hover:bg-white/[0.02] transition-colors cursor-pointer group">
+                                <div
+                                    key={h.id}
+                                    onClick={() => window.dispatchEvent(new CustomEvent('open-lab-exam-details-modal', { detail: { ...h, status: 'Completed' } }))}
+                                    className="p-5 hover:bg-white/[0.02] transition-colors cursor-pointer group"
+                                >
                                     <div className="flex justify-between items-start mb-2">
                                         <h4 className="text-sm font-bold text-white group-hover:text-primary transition-colors">{h.exam}</h4>
                                         <span className={cn(

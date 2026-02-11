@@ -5,7 +5,7 @@ import { Header } from "./Header";
 import { X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Link } from "react-router-dom";
-import logoUrl from "../../assets/logotipo.png";
+import logoUrl from "../../assets/logo.svg";
 
 interface MainLayoutProps {
     children: React.ReactNode;

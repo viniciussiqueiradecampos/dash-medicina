@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Search, Activity, History, ClipboardList, Calendar, Clock, MapPin, CheckCircle2, Plus, Trash2, AlertCircle, Download } from "lucide-react";
+import { X, Search, Activity, History, ClipboardList, Calendar, Clock, MapPin, CheckCircle2, Plus, Trash2, AlertCircle, Download, FlaskConical } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 // --- Components ---
@@ -645,6 +645,77 @@ export function GoalModal() {
     );
 }
 
+// --- Lab Exam Details Modal ---
+export function LabExamDetailsModal() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [exam, setExam] = useState<any>(null);
+
+    useEffect(() => {
+        const handleOpen = (e: any) => {
+            setExam(e.detail);
+            setIsOpen(true);
+        };
+        window.addEventListener('open-lab-exam-details-modal', handleOpen);
+        return () => window.removeEventListener('open-lab-exam-details-modal', handleOpen);
+    }, []);
+
+    if (!exam) return null;
+
+    return (
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Blood Test Details">
+            <div className="space-y-6">
+                <div className="flex items-center justify-between p-6 bg-white/5 rounded-2xl border border-white/5">
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
+                            <FlaskConical size={24} />
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-white">{exam.exam}</h3>
+                            <p className="text-[#90a1b9] text-sm">Patient: {exam.patient}</p>
+                        </div>
+                    </div>
+                    <div className="text-right">
+                        <span className="text-xs font-bold text-[#62748e] block mb-1">Status</span>
+                        <span className="text-primary font-bold">{exam.status}</span>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-[#1d293d] rounded-xl border border-white/5">
+                        <span className="text-[10px] font-bold text-[#62748e] uppercase tracking-wider block mb-2">Reference Range</span>
+                        <p className="text-white font-medium">135 - 145 mEq/L</p>
+                    </div>
+                    <div className="p-4 bg-[#1d293d] rounded-xl border border-white/5">
+                        <span className="text-[10px] font-bold text-[#62748e] uppercase tracking-wider block mb-2">Measured Value</span>
+                        <p className="text-status-success font-bold text-lg">140 mEq/L</p>
+                    </div>
+                </div>
+
+                <div className="bg-[#17191a] p-6 rounded-2xl border border-white/5 space-y-4">
+                    <h4 className="text-white font-bold flex items-center gap-2">
+                        <AlertCircle size={18} className="text-primary" />
+                        Clinical Interpretation
+                    </h4>
+                    <p className="text-[#90a1b9] text-sm leading-relaxed">
+                        The patient's electrolytic levels are within the normal physiological range.
+                        No immediate intervention is required for this parameter.
+                        Continue to monitor during regular consultations.
+                    </p>
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                    <button className="flex-1 bg-white/5 text-white py-3 rounded-xl font-medium hover:bg-white/10 transition-colors">
+                        Download Report (PDF)
+                    </button>
+                    <button onClick={() => setIsOpen(false)} className="flex-1 bg-primary text-white py-3 rounded-xl font-bold hover:bg-primary-dark transition-colors">
+                        Acknowledge Results
+                    </button>
+                </div>
+            </div>
+        </Modal>
+    );
+}
+
 // --- Main Modals Provider ---
 export function DashboardModals() {
     return (
@@ -656,6 +727,7 @@ export function DashboardModals() {
             <InterventionModal />
             <GoalModal />
             <LabIntegrationModal />
+            <LabExamDetailsModal />
         </>
     );
 }
