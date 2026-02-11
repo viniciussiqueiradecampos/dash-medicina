@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { DashboardData } from "../types";
 
 // Mock Data
+// Patient Hook
 const MOCK_PATIENT_DATA: DashboardData = {
     patient: {
         id: "#RG-2025-001",
