@@ -47,18 +47,15 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
             {/* Toggle Button */}
             <button
                 onClick={onToggle}
-                className={cn(
-                    "absolute -right-3 top-[102px] w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white shadow-lg z-50 hover:scale-110 transition-transform",
-                    isCollapsed && "right-4"
-                )}
+                className="absolute -right-3 top-[102px] w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white shadow-lg z-50 hover:scale-110 transition-transform"
             >
                 {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
             </button>
 
             {/* Logo */}
             <div className={cn(
-                "mb-[60px] pl-2 overflow-hidden transition-all duration-300 flex items-center justify-center",
-                isCollapsed ? "w-full pl-0" : "w-[180px]"
+                "mb-[60px] overflow-hidden transition-all duration-300 flex items-center justify-center",
+                isCollapsed ? "w-full pl-0" : "w-[180px] pl-2"
             )}>
                 <img
                     src={isCollapsed ? closeLogoUrl : logoUrl}
