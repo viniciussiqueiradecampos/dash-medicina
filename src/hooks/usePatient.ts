@@ -88,7 +88,7 @@ const MOCK_PATIENT_DATA: DashboardData = {
 export function usePatient(id: string = "default") {
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error] = useState<string | null>(null);
 
     useEffect(() => {
         // Simulate async fetch
