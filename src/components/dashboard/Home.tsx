@@ -40,25 +40,27 @@ export function Home() {
     };
 
     const handleStopTimer = () => {
-        if (currentPatient && timer > 0) {
+        if (timer > 0) {
             const finalDuration = timer;
             setIsTimerRunning(false);
             if (timerRef.current) clearInterval(timerRef.current);
 
-            const updatedPatient = {
-                ...currentPatient,
-                serviceTimer: (currentPatient.serviceTimer || 0) + finalDuration
-            };
-            updatePatient(updatedPatient);
+            if (currentPatient) {
+                const updatedPatient = {
+                    ...currentPatient,
+                    serviceTimer: (currentPatient.serviceTimer || 0) + finalDuration
+                };
+                updatePatient(updatedPatient);
 
-            // Dispatch event for recording in registry
-            window.dispatchEvent(new CustomEvent('service-recorded', {
-                detail: {
-                    patientId: currentPatient.id,
-                    duration: finalDuration,
-                    timestamp: new Date().toISOString()
-                }
-            }));
+                // Dispatch event for recording in registry
+                window.dispatchEvent(new CustomEvent('service-recorded', {
+                    detail: {
+                        patientId: currentPatient.id,
+                        duration: finalDuration,
+                        timestamp: new Date().toISOString()
+                    }
+                }));
+            }
 
             setTimer(0);
         }
@@ -120,7 +122,7 @@ export function Home() {
                                 <button
                                     onClick={handleStopTimer}
                                     disabled={timer === 0}
-                                    className="flex-1 bg-white/5 hover:bg-white/10 text-white p-3 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="flex-1 bg-white/5 hover:bg-status-danger hover:border-status-danger text-white p-3 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <Square size={18} /> <span className="text-sm font-bold">Finish</span>
                                 </button>
