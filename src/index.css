@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  /* Abstract Vision Theme Colors */
+  --color-primary: #04989f;
+  --color-primary-dark: #014c4f;
+
+  --color-status-success: #00d492;
+  --color-status-warning: #ffb900;
+  --color-status-danger: #ff637e;
+  --color-accent-purple: #8e51ff;
+
+  --color-bg-sidebar: #121212;
+  --color-bg-card: #17191a;
+  --color-bg-input: #1d293d;
+
+  --color-text-secondary: #90a1b9;
+  --color-text-muted: #62748e;
+
+  /* Abstract Vision Layout */
+  --width-sidebar: 297px;
+  --width-mobile-gutter: 20px;
+}
+
+/* Base Styles */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0b0d0f;
+  /* Main Canvas Dark */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
