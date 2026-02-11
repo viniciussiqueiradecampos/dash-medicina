@@ -32,31 +32,55 @@ export default function MainLayout({ children }: MainLayoutProps) {
             {isMobileMenuOpen && (
                 <div className="fixed inset-0 z-[60] xl:hidden">
                     <div
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300"
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
-                    <div className="absolute top-0 left-0 bottom-0 w-[80vw] max-w-[300px] bg-bg-sidebar shadow-2xl animate-slide-in p-4 z-[70]">
-                        <div className="flex items-center justify-between mb-8">
-                            <img src={logoUrl} alt="Logo" className="h-8 w-auto object-contain" />
+                    <div className="absolute top-0 left-0 bottom-0 w-[85vw] max-w-[320px] bg-bg-sidebar shadow-2xl animate-in slide-in-from-left duration-300 p-6 z-[70] flex flex-col">
+                        <div className="flex items-center justify-between mb-10">
+                            <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="p-2 text-white hover:bg-white/10 rounded-lg"
+                                className="p-2 text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors"
                             >
-                                <X size={24} />
+                                <X size={20} />
                             </button>
                         </div>
-                        {/* Reusing navigation logic could be refactored, but for now simple links */}
-                        <nav className="flex flex-col gap-2">
-                            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className={cn("px-4 py-3 rounded-xl font-medium transition-all", location.pathname === "/" ? "bg-primary text-white" : "text-text-secondary hover:text-white hover:bg-white/5")}>
-                                Home
-                            </Link>
-                            <Link to="/overview" onClick={() => setIsMobileMenuOpen(false)} className={cn("px-4 py-3 rounded-xl font-medium transition-all", location.pathname === "/overview" ? "bg-primary text-white" : "text-text-secondary hover:text-white hover:bg-white/5")}>
-                                Overview
-                            </Link>
-                            <Link to="/patients" onClick={() => setIsMobileMenuOpen(false)} className={cn("px-4 py-3 rounded-xl font-medium transition-all", location.pathname === "/patients" ? "bg-primary text-white" : "text-text-secondary hover:text-white hover:bg-white/5")}>
-                                Patients
-                            </Link>
+
+                        <nav className="flex flex-col gap-2 flex-1">
+                            {[
+                                { label: "Home", path: "/" },
+                                { label: "Overview", path: "/overview" },
+                                { label: "Labs", path: "/labs" },
+                                { label: "Patients", path: "/patients" },
+                                { label: "Reports", path: "/reports" },
+                                { label: "Settings", path: "/settings" },
+                            ].map((item) => (
+                                <Link
+                                    key={item.path}
+                                    to={item.path}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className={cn(
+                                        "px-4 py-3.5 rounded-2xl font-bold text-sm transition-all border border-transparent flex items-center justify-between group",
+                                        location.pathname === item.path
+                                            ? "bg-primary text-white shadow-lg shadow-primary/20 border-white/5"
+                                            : "text-text-secondary hover:text-white hover:bg-white/5"
+                                    )}
+                                >
+                                    {item.label}
+                                    {location.pathname === item.path && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
+                                </Link>
+                            ))}
                         </nav>
+
+                        <div className="mt-auto pt-6 border-t border-white/5">
+                            <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                <img src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg" alt="Admin" className="w-10 h-10 rounded-full object-cover" />
+                                <div className="min-w-0">
+                                    <p className="text-sm font-bold text-white truncate">Dr. Admin</p>
+                                    <p className="text-[10px] text-text-secondary truncate">pedro.campos@hospital.com</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

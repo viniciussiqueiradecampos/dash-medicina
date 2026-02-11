@@ -34,11 +34,7 @@ const appointments: Appointment[] = [
 export function Appointments() {
     return (
         <div
-            className="flex flex-col justify-between items-center rounded-[18px] bg-[#17191A] border border-white/5 shadow-xl shrink-0 w-full"
-            style={{
-                height: '284px',
-                padding: '18px 16px',
-            }}
+            className="flex flex-col justify-between items-center rounded-[18px] bg-[#17191A] border border-white/5 shadow-xl shrink-0 w-full min-h-[284px] p-[18px_16px]"
         >
             {/* Header */}
             <div className="flex items-center justify-between w-full px-2">

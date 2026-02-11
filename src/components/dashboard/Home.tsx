@@ -69,37 +69,40 @@ export function Home() {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header / Hero Section with Timer */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div className="lg:col-span-8 bg-gradient-to-br from-[#1d293d] to-[#121212] p-8 rounded-[32px] border border-white/5 relative overflow-hidden group">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+                <div className="lg:col-span-8 bg-gradient-to-br from-[#1d293d] to-[#121212] p-6 md:p-8 rounded-[32px] border border-white/5 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
 
-                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
                         <div className="space-y-4">
-                            <h1 className="text-4xl font-bold text-white tracking-tight">Good morning, <span className="text-primary italic">Dr. Admin</span></h1>
-                            <p className="text-[#90a1b9] max-w-md">You have 8 appointments scheduled for today. Your first patient is arriving in 5 minutes.</p>
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                                Good morning, <br className="sm:hidden" />
+                                <span className="text-primary italic">Dr. Admin</span>
+                            </h1>
+                            <p className="text-[#90a1b9] text-sm md:text-base max-w-md">You have 8 appointments scheduled for today. Your first patient is arriving in 5 minutes.</p>
 
-                            <div className="flex flex-wrap gap-4 pt-4">
-                                <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
-                                    <Clock size={16} className="text-primary" />
-                                    <span className="text-xs font-bold text-white">Shift: 08:00 - 17:00</span>
+                            <div className="flex flex-wrap gap-4 pt-2 md:pt-4">
+                                <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-white/10">
+                                    <Clock size={14} className="text-primary" />
+                                    <span className="text-[10px] md:text-xs font-bold text-white line-clamp-1">Shift: 08:00 - 17:00</span>
                                 </div>
-                                <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
-                                    <Calendar size={16} className="text-accent-purple" />
-                                    <span className="text-xs font-bold text-white">November 10, 2025</span>
+                                <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-white/10">
+                                    <Calendar size={14} className="text-accent-purple" />
+                                    <span className="text-[10px] md:text-xs font-bold text-white line-clamp-1">November 10, 2025</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Service Counter Card */}
-                        <div className="w-full md:w-auto bg-[#17191a] p-6 rounded-[24px] border border-white/10 shadow-2xl space-y-4 min-w-[280px]">
+                        <div className="w-full md:w-auto bg-[#17191a] p-5 md:p-6 rounded-[24px] border border-white/10 shadow-2xl space-y-4 min-w-[280px]">
                             <div className="flex items-center justify-between">
                                 <span className="text-[10px] font-bold text-[#62748e] uppercase tracking-widest">
-                                    Patient Consultation {currentPatient && <span className="text-primary/50 ml-1">• {currentPatient.id}</span>}
+                                    Consultation {currentPatient && <span className="text-primary/50 ml-1">• {currentPatient.id}</span>}
                                 </span>
                                 <div className={cn("w-2 h-2 rounded-full", isTimerRunning ? "bg-status-danger animate-pulse" : "bg-white/20")} />
                             </div>
 
-                            <div className="text-4xl font-mono font-bold text-white text-center py-2">
+                            <div className="text-3xl md:text-4xl font-mono font-bold text-white text-center py-1 md:py-2">
                                 {formatTime(timer)}
                             </div>
 
@@ -107,35 +110,35 @@ export function Home() {
                                 {!isTimerRunning ? (
                                     <button
                                         onClick={() => setIsTimerRunning(true)}
-                                        className="flex-1 bg-primary hover:bg-primary-dark text-white p-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                                        className="flex-1 bg-primary hover:bg-primary-dark text-white p-2.5 md:p-3 rounded-xl flex items-center justify-center gap-2 transition-all"
                                     >
-                                        <Play size={18} /> <span className="text-sm font-bold">Start</span>
+                                        <Play size={16} /> <span className="text-xs md:text-sm font-bold">Start</span>
                                     </button>
                                 ) : (
                                     <button
                                         onClick={() => setIsTimerRunning(false)}
-                                        className="flex-1 bg-status-warning hover:bg-status-warning/80 text-white p-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                                        className="flex-1 bg-status-warning hover:bg-status-warning/80 text-white p-2.5 md:p-3 rounded-xl flex items-center justify-center gap-2 transition-all"
                                     >
-                                        <Pause size={18} /> <span className="text-sm font-bold">Pause</span>
+                                        <Pause size={16} /> <span className="text-xs md:text-sm font-bold">Pause</span>
                                     </button>
                                 )}
                                 <button
                                     onClick={handleStopTimer}
                                     disabled={timer === 0}
-                                    className="flex-1 bg-white/5 hover:bg-status-danger hover:border-status-danger text-white p-3 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="flex-1 bg-white/5 hover:bg-status-danger hover:border-status-danger text-white p-2.5 md:p-3 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    <Square size={18} /> <span className="text-sm font-bold">Finish</span>
+                                    <Square size={16} /> <span className="text-xs md:text-sm font-bold">Finish</span>
                                 </button>
                             </div>
                             {currentPatient && (
-                                <p className="text-[10px] text-center text-[#62748e]">Recording for <b>{currentPatient.name}</b> ({currentPatient.id})</p>
+                                <p className="text-[10px] text-center text-[#62748e] line-clamp-1">Recording for <b>{currentPatient.name}</b></p>
                             )}
                         </div>
                     </div>
                 </div>
 
                 {/* Quick Stats Card */}
-                <div className="lg:col-span-4 bg-[#17191a]/50 p-8 rounded-[32px] border border-white/5 backdrop-blur-sm flex flex-col justify-between">
+                <div className="lg:col-span-4 bg-[#17191a]/50 p-6 md:p-8 rounded-[32px] border border-white/5 backdrop-blur-sm flex flex-col justify-between min-h-[250px] lg:min-h-0">
                     <div className="space-y-6">
                         <div className="flex items-center justify-between">
                             <h3 className="text-lg font-bold text-white">Hospital Activity</h3>

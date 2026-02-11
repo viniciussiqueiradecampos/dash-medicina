@@ -30,7 +30,7 @@ export function CurrentDiagnosis({ className }: CurrentDiagnosisProps) {
                     </style>
 
                     {/* Top Row: Icon + Diagnosis Details */}
-                    <div className="flex items-start gap-5">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-5 text-center sm:text-left">
                         {/* Warning Icon Container */}
                         <div className="w-12 h-12 rounded-full bg-[#3d2e0f] flex items-center justify-center shrink-0 border border-[#FEBC1E]/20">
                             <AlertCircle className="text-[#FEBC1E]" size={24} />
@@ -46,11 +46,14 @@ export function CurrentDiagnosis({ className }: CurrentDiagnosisProps) {
                     </div>
 
                     {/* Bottom Row: Severity & Date */}
-                    <div className="flex flex-col md:flex-row items-end md:items-center justify-between gap-6 w-full mt-2">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full mt-2">
 
                         {/* Severity Slider */}
                         <div className="flex flex-col gap-2 w-full max-w-md">
-                            <span className="text-xs font-medium text-[#62748e]">Severity</span>
+                            <div className="flex justify-between items-center mb-1">
+                                <span className="text-xs font-medium text-[#62748e]">Severity</span>
+                                <span className="md:hidden text-[#FEBC1E] font-bold text-xs">6/10</span>
+                            </div>
                             <div className="flex items-center gap-4">
                                 <div className="flex-1 h-3 bg-[#1d293d] rounded-full overflow-hidden">
                                     <div
@@ -58,15 +61,15 @@ export function CurrentDiagnosis({ className }: CurrentDiagnosisProps) {
                                         style={{ width: '60%' }} // 6/10
                                     />
                                 </div>
-                                <span className="text-[#FEBC1E] font-bold text-sm">6/10</span>
+                                <span className="hidden md:block text-[#FEBC1E] font-bold text-sm">6/10</span>
                             </div>
                         </div>
 
                         {/* Incident Date */}
-                        <div className="flex items-center gap-8">
-                            <div className="flex flex-col items-end">
-                                <span className="text-xs font-medium text-[#62748e]">Incident Date</span>
-                                <span className="text-white font-medium">Nov 7, 2025</span>
+                        <div className="flex items-center gap-8 w-full md:w-auto justify-between md:justify-end border-t border-white/5 pt-4 md:border-t-0 md:pt-0">
+                            <div className="flex flex-col items-start md:items-end">
+                                <span className="text-[10px] md:text-xs font-medium text-[#62748e] uppercase tracking-wider">Incident Date</span>
+                                <span className="text-sm md:text-base text-white font-medium">Nov 7, 2025</span>
                             </div>
                         </div>
 

@@ -48,25 +48,25 @@ export function PatientOverview() {
         <div className="w-full space-y-8 animate-in fade-in duration-500">
             {/* Top Header Section */}
             <div className="flex flex-col gap-1 relative">
-                <div className="flex items-center justify-between">
-                    <h1 className="text-3xl font-bold text-white">Patient Overview</h1>
+                <div className="flex flex-row items-center justify-between gap-4">
+                    <h1 className="text-xl md:text-3xl font-bold text-white">Patient Overview</h1>
 
                     <button
                         onClick={() => window.dispatchEvent(new CustomEvent('open-prescription-modal'))}
-                        className="bg-primary hover:bg-primary-dark transition-colors text-white px-6 py-2 rounded-xl flex items-center gap-2 font-medium text-sm"
+                        className="bg-primary hover:bg-primary-dark transition-colors text-white px-3 md:px-6 py-2 rounded-xl flex items-center gap-2 font-medium text-[10px] md:text-sm shrink-0"
                     >
-                        <ClipboardPlus size={18} />
-                        PRESCRIPTION
+                        <ClipboardPlus size={16} className="md:w-[18px] md:h-[18px]" />
+                        <span className="hidden xs:inline">PRESCRIPTION</span>
                     </button>
                 </div>
-                <p className="text-[#90a1b9] text-base">Comprehensive medical overview for {currentPatient.name}</p>
+                <p className="text-[#90a1b9] text-sm md:text-base">Comprehensive medical overview for {currentPatient.name}</p>
             </div>
 
             {/* Patient Profile & Biometrics Container */}
             <div className="bg-[#17191a]/50 rounded-[18px] p-6 flex flex-col xl:flex-row gap-8 items-center xl:items-start w-full backdrop-blur-sm border border-white/5">
 
                 {/* Patient Profile Section */}
-                <div className="flex items-center gap-4 min-w-[300px] xl:border-r border-white/5 pr-8">
+                <div className="flex flex-col sm:flex-row items-center gap-4 min-w-full xl:min-w-[300px] xl:border-r border-white/5 xl:pr-8">
                     <div className="relative">
                         <div className="w-[80px] h-[80px] rounded-[24px] border-4 border-[rgba(142,81,255,0.2)] overflow-hidden p-1">
                             <img src={currentPatient.image} alt={currentPatient.name} className="w-full h-full object-cover rounded-[18px]" />
@@ -76,14 +76,14 @@ export function PatientOverview() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                         <h2 className="text-2xl font-bold text-white leading-tight">{currentPatient.name}</h2>
-                        <div className="flex items-center gap-3 text-[#90a1b9] text-sm mt-2 font-medium">
+                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 text-[#90a1b9] text-xs md:text-sm mt-2 font-medium">
                             <div className="flex items-center gap-1.5 bg-[#1d293d] px-2 py-1 rounded-md">
                                 <User size={14} className="text-primary" />
                                 <span>{currentPatient.gender}</span>
                             </div>
-                            <span className="text-white/20">•</span>
+                            <span className="text-white/20 hidden xs:inline">•</span>
                             <span>Patient ID: #{currentPatient.id}</span>
                         </div>
                     </div>

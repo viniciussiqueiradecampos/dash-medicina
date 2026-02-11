@@ -74,12 +74,12 @@ const Overview = () => {
       case "Assessment": return <AssessmentSection />;
       case "Treatment Plan": return <TreatmentPlanSection />;
       default: return (
-        <div className="flex flex-row gap-8 mx-auto mt-4" style={{ width: '1238px', maxWidth: '96%' }}>
+        <div className="flex flex-col lg:flex-row gap-8 mx-auto mt-4 w-full px-4 lg:px-8 max-w-[1356px]">
           <div className="flex-1 flex flex-col gap-8 min-w-0">
             <MedicalImaging />
             <Appointments />
           </div>
-          <div className="w-[399px] shrink-0 min-w-0">
+          <div className="w-full lg:w-[399px] shrink-0 min-w-0">
             <GeneralPatientPanel />
           </div>
         </div>
@@ -88,21 +88,21 @@ const Overview = () => {
   };
 
   return (
-    <div className="text-white space-y-8">
+    <div className="text-white space-y-8 pb-10">
       <PatientOverview />
       <CurrentDiagnosis />
       <LatestBloodTests />
 
       {/* Rectangle 29 - Container */}
-      <div className="w-full max-w-[1356px] min-h-[928px] rounded-[18px] bg-[#17191a]/50 border border-white/5 backdrop-blur-sm flex flex-col pt-8 pb-12">
+      <div className="w-full max-w-[1356px] min-h-[auto] lg:min-h-[928px] rounded-[18px] md:rounded-[32px] bg-[#17191a]/50 border border-white/5 backdrop-blur-sm flex flex-col pt-8 pb-12">
         {/* Navigation Menu */}
-        <div className="flex justify-between items-center mx-auto bg-white/5 p-[10px] rounded-xl border border-white/5 w-[1238px] max-w-[96%]">
+        <div className="flex flex-wrap md:flex-nowrap justify-between items-center mx-auto bg-white/5 p-[6px] md:p-[10px] rounded-xl border border-white/5 w-full max-w-[1238px] px-4 md:px-[10px] gap-2">
           {["Intake", "Assessment", "Diagnosis", "Treatment Plan"].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "flex-1 py-2 text-sm font-medium transition-all rounded-[8px]",
+                "flex-1 py-2 text-[10px] md:text-sm font-medium transition-all rounded-[8px] min-w-[80px]",
                 activeTab === tab
                   ? "bg-[#0b0d0f] text-[#4efde5] shadow-lg border border-white/5"
                   : "text-[#90a1b9] hover:text-white"
@@ -114,7 +114,7 @@ const Overview = () => {
         </div>
 
         {/* Content Area Rendering */}
-        <div className="mt-10 px-4 xl:px-8">
+        <div className="mt-8 md:mt-10">
           {renderContent()}
         </div>
       </div>

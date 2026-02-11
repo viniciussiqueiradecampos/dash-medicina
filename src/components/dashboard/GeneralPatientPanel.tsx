@@ -5,7 +5,7 @@ export function GeneralPatientPanel() {
     const xrays = [1, 2, 3, 4, 5, 6];
 
     return (
-        <div className="w-full h-[756px] bg-[#17191A] rounded-[18px] border border-white/5 flex flex-col overflow-hidden shrink-0 shadow-2xl">
+        <div className="w-full min-h-[500px] lg:h-[756px] bg-[#17191A] rounded-[18px] border border-white/5 flex flex-col overflow-hidden shrink-0 shadow-2xl">
             {/* Header */}
             <div className="p-6 pb-0">
                 <h2 className="text-xl font-bold text-white mb-6">General Patient</h2>
