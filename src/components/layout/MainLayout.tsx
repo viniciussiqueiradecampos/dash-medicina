@@ -13,13 +13,20 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const location = useLocation();
     const isLoginPage = location.pathname === "/login";
 
     return (
         <div className="flex w-full min-h-screen bg-bg-main relative font-sans text-white overflow-x-hidden">
             {/* Sidebar Desktop */}
-            {!isLoginPage && <Sidebar className="hidden xl:flex z-50" />}
+            {!isLoginPage && (
+                <Sidebar
+                    className="hidden xl:flex z-50"
+                    isCollapsed={isCollapsed}
+                    onToggle={() => setIsCollapsed(!isCollapsed)}
+                />
+            )}
 
             {/* Mobile Drawer (Overlay) */}
             {isMobileMenuOpen && (
@@ -57,13 +64,16 @@ export default function MainLayout({ children }: MainLayoutProps) {
             {/* Main Content Area */}
             <div className={cn(
                 "flex-1 flex flex-col w-full min-h-screen transition-all duration-300",
-                !isLoginPage && "xl:pl-[297px]"
+                !isLoginPage && (isCollapsed ? "xl:pl-[100px]" : "xl:pl-[297px]")
             )}>
                 {!isLoginPage && <MobileHeader onMenuClick={() => setIsMobileMenuOpen(true)} />}
 
                 {/* Fixed Desktop Header */}
                 {!isLoginPage && (
-                    <div className="hidden xl:block fixed top-0 right-0 left-[297px] z-40 bg-bg-main/95 backdrop-blur-sm border-b border-white/5">
+                    <div className={cn(
+                        "hidden xl:block fixed top-0 right-0 z-40 bg-bg-main/95 backdrop-blur-sm border-b border-white/5 transition-all duration-300",
+                        isCollapsed ? "left-[100px]" : "left-[297px]"
+                    )}>
                         <Header />
                     </div>
                 )}
